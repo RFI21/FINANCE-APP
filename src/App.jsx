@@ -301,7 +301,7 @@ DATA PROFIL SAAT INI:
             <div className="bg-gradient-to-tr from-emerald-500 to-teal-400 p-2 rounded-xl text-white shadow-lg shadow-emerald-500/20 transition-transform group-hover:scale-105">
               <TrendingUp size={20} />
             </div>
-            <span className="font-bold text-xl tracking-tight bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">FIRE.id</span>
+            <span className="font-bold text-xl tracking-tight bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">Finance.id</span>
           </div>
 
           {/* Navigasi Desktop & Pencari Global */}
