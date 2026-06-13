@@ -213,19 +213,19 @@ try {
   while (attempt < 5 && !success) {
     try {
 
-      const res = await fetch(
-        "https://finance-ai-api.vercel.app/api/chat",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            message: textToAsk,
-            systemPrompt: systemPrompt
-          })
-        }
-      );
+const res = await fetch(
+  "https://finance-ai-api-cvr1.vercel.app/api/chat",
+  {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: textToAsk,
+      systemPrompt
+    })
+  }
+);
 
       const data = await res.json();
 
