@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://RFI21.github.io/FINANCE-APP/",
+  "homepage": "https://rfi21.github.io/FINANCE-APP/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
