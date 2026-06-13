@@ -253,7 +253,6 @@ const res = await fetch(
     }
   }
 
-  console.log("AI RESPONSE:", response);
 
   const replyText =
     response?.candidates?.[0]?.content?.parts?.[0]?.text ||
