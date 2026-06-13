@@ -28,7 +28,7 @@ import {
 } from 'lucide-react';
 
 // === CONFIG & INITIAL STATE ===
-const apiKey = ""; // Menggunakan API key runtime environment
+// Menggunakan API key runtime environment
 
 // Mock Data untuk Instrumen Investasi & Grafik
 const mockInstruments = [
@@ -204,45 +204,84 @@ export default function App() {
     - Target FIRE (Disesuaikan Inflasi): Rp ${calcResults.fireNumberAdjusted.toLocaleString('id-ID')}
     - Investasi Bulanan Diperlukan: Rp ${calcResults.monthlySavingsNeeded.toLocaleString('id-ID')}/bulan.`;
 
+try {
+  let attempt = 0;
+  let delay = 1000;
+  let response;
+  let success = false;
+
+  while (attempt < 5 && !success) {
     try {
-      let attempt = 0;
-      let delay = 1000;
-      let response;
-      let success = false;
 
-      while (attempt < 5 && !success) {
-        try {
-          const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              contents: [{ parts: [{ text: textToAsk }] }],
-              systemInstruction: { parts: [{ text: systemPrompt }] }
-            })
-          });
-
-          if (res.ok) {
-            response = await res.json();
-            success = true;
-          } else {
-            throw new Error(`HTTP status ${res.status}`);
-          }
-        } catch (error) {
-          attempt++;
-          if (attempt >= 5) throw error;
-          await new Promise(resolve => setTimeout(resolve, delay));
-          delay *= 2;
+      const res = await fetch(
+        "https://finance-ai-api.vercel.app/api/chat",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message: textToAsk,
+            systemPrompt: systemPrompt
+          })
         }
+      );
+
+      const data = await res.json();
+
+      if (res.ok) {
+        response = data;
+        success = true;
+      } else {
+        throw new Error(
+          data.error || `HTTP status ${res.status}`
+        );
       }
 
-      const replyText = response?.candidates?.[0]?.content?.parts?.[0]?.text || "Maaf, saya tidak dapat merespons saat ini. Silakan coba sesaat lagi.";
-      setAiChat([...newChatHistory, { role: 'assistant', text: replyText }]);
-    } catch (err) {
-      console.error(err);
-      setAiChat([...newChatHistory, { role: 'assistant', text: "Terjadi kesalahan koneksi saat menghubungi AI Anda." }]);
-    } finally {
-      setAiLoading(false);
+    } catch (error) {
+      attempt++;
+
+      if (attempt >= 5) {
+        throw error;
+      }
+
+      await new Promise(resolve =>
+        setTimeout(resolve, delay)
+      );
+
+      delay *= 2;
     }
+  }
+
+  console.log("AI RESPONSE:", response);
+
+  const replyText =
+    response?.candidates?.[0]?.content?.parts?.[0]?.text ||
+    "Maaf, saya tidak dapat merespons saat ini. Silakan coba sesaat lagi.";
+
+  setAiChat([
+    ...newChatHistory,
+    {
+      role: "assistant",
+      text: replyText
+    }
+  ]);
+
+} catch (err) {
+
+  console.error(err);
+
+  setAiChat([
+    ...newChatHistory,
+    {
+      role: "assistant",
+      text: "Terjadi kesalahan koneksi saat menghubungi AI Anda."
+    }
+  ]);
+
+} finally {
+  setAiLoading(false);
+}
   };
 
   const downloadReport = () => {
