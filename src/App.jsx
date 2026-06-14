@@ -497,7 +497,7 @@ DATA PROFIL SAAT INI:
                 <span className="bg-gradient-to-r from-emerald-500 to-teal-400 bg-clip-text text-transparent">Financial Freedom</span> Anda!
               </h1>
               <p className={`text-sm md:text-base mb-8 max-w-2xl leading-relaxed ${darkMode ? 'opacity-80' : 'text-slate-600 font-medium'}`}>
-                Selamat datang di FIRE.id. Aplikasi finansial modern untuk mensimulasikan dana masa tua secara mandiri, lengkap dengan asisten cerdas AI, data instrumen pasar modal, serta opsi ekspor ke Google Sheets.
+                Selamat datang di Finance.id. Aplikasi finansial modern untuk mensimulasikan dana masa tua secara mandiri, lengkap dengan asisten cerdas AI, data instrumen pasar modal, serta opsi ekspor ke Google Sheets.
               </p>
               <div className="flex flex-wrap gap-3">
                 <button 
@@ -1107,7 +1107,7 @@ DATA PROFIL SAAT INI:
         darkMode ? 'bg-slate-950 border-slate-900 text-slate-500' : 'bg-slate-50 border-slate-200 text-slate-400'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs font-medium space-y-4">
-          <p>© 2026 FIRE.id • Aplikasi Simulasi Mandiri Financial Freedom Indonesia.</p>
+          <p>© 2026 Finance.id • Aplikasi Simulasi Mandiri Financial Freedom Indonesia.</p>
         </div>
       </footer>
 
